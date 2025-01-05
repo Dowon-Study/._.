@@ -1,3 +1,4 @@
+//백준 3003번
 // import java.util.Scanner;
 
 // public class Main {
@@ -18,6 +19,8 @@
 //     }
 // }
 
+
+//백준 2444번
 import java.util.Scanner;
 
 public class Main {
