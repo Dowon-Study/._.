@@ -51,24 +51,21 @@
 //     }
 // }
 
-import java.util.Scanner;
+//10988번
+// import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
+// public class Main {
+//     public static void main(String[] args){
+//         Scanner sc = new Scanner(System.in);
 
-        String str = sc.next();
-        int len1 = str.length() - 1;
-
-        for(int i = 0; i < len1; i++){
-            if(str.charAt(i) != str.charAt(len1 - i)){
-                System.out.println(0);
-                break;
-            } else if (i > (int)len1 / 2){
-                System.out.println(1);
-                break;
-            }
-            
-        }
-    }
-}
+//         String str = sc.next();
+//         int len1 = str.length() - 1;
+//         int istrue = 0;
+//         for(int i = 0; i <= len1 / 2; i++){
+//             if(str.charAt(i) != str.charAt(len1 - i)){
+//                 istrue = 1;
+//             }
+//         }
+//         System.out.println(istrue == 0? 1:0);
+//     }
+// }
