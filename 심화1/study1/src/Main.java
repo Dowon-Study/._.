@@ -140,41 +140,107 @@
 // }
 
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.HashSet;
-import java.util.StringTokenizer;
+// import java.io.BufferedReader;
+// import java.io.BufferedWriter;
+// import java.io.InputStreamReader;
+// import java.io.OutputStreamWriter;
+// import java.util.HashSet;
+// import java.util.StringTokenizer;
+
+// public class Main {
+//     public static void main(String[] args) throws Exception {
+//         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+//         int test = Integer.parseInt(br.readLine());
+        
+//         for(int i = 0; i < test; i++){
+//             int note1 = Integer.parseInt(br.readLine());
+//             HashSet<Integer> note1Set = new HashSet<>();
+//             StringTokenizer st = new StringTokenizer(br.readLine());
+//             for (int j = 0; j < note1; j++){
+//                 note1Set.add(Integer.parseInt(st.nextToken()));
+//             }
+
+//             int note2 = Integer.parseInt(br.readLine());
+//             st = new StringTokenizer(br.readLine());
+//             for (int k = 0; k < note2; k++){
+//                 int num = Integer.parseInt(st.nextToken());
+//                 if(note1Set.contains(num)){
+//                     bw.write("1\n");
+//                 } else {
+//                     bw.write("0\n");
+//                 }
+//             }
+//         }
+//         bw.flush();
+//         br.close();
+//         bw.close();
+//     }
+// }
+
+
+// import java.util.Arrays;
+// import java.util.Scanner;
+
+//  public class Main {
+//     public static void main(String[] args) throws Exception {
+//         Scanner sc = new Scanner(System.in);
+
+//         int k = sc.nextInt();
+//         int n = sc.nextInt();
+        
+//         int[] arr = new int[k];
+
+//         for(int i = 0; i < k; i++){
+//             arr[i] = sc.nextInt();
+//         }
+//         int count = 0;
+//         Arrays.sort(arr);
+//         int total = (int)Arrays.stream(arr).sum() / n;
+//         while(count != n){
+//             count = 0;
+//             for(int i = 0; i < k; i++){
+//                 count += (int)arr[i] / total;
+//             }
+//             total--;
+//         }
+//         System.out.println(total + 1);
+//     }
+//  }
+
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        Scanner sc = new Scanner(System.in);
 
-        int test = Integer.parseInt(br.readLine());
+        int k = sc.nextInt();
+        int n = sc.nextInt();
         
-        for(int i = 0; i < test; i++){
-            int note1 = Integer.parseInt(br.readLine());
-            HashSet<Integer> note1Set = new HashSet<>();
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < note1; j++){
-                note1Set.add(Integer.parseInt(st.nextToken()));
-            }
+        int[] arr = new int[k];
+        for (int i = 0; i < k; i++) {
+            arr[i] = sc.nextInt();
+        }
+        Arrays.sort(arr);
+        long low = 1;
+        long high = arr[k - 1];
+        long result = 0;
+        while (low <= high) {
+            long mid = (low + high) / 2;
+            int count = 0;
 
-            int note2 = Integer.parseInt(br.readLine());
-            st = new StringTokenizer(br.readLine());
-            for (int k = 0; k < note2; k++){
-                int num = Integer.parseInt(st.nextToken());
-                if(note1Set.contains(num)){
-                    bw.write("1\n");
-                } else {
-                    bw.write("0\n");
-                }
+            for (int i = 0; i < k; i++) {
+                count += arr[i] / mid;
+            }
+            if (count >= n) {
+                result = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
         }
-        bw.flush();
-        br.close();
-        bw.close();
+        System.out.println(result);
     }
 }
