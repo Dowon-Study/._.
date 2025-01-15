@@ -209,38 +209,154 @@
 //     }
 //  }
 
+// import java.util.Arrays;
+// import java.util.Scanner;
+
+// public class Main {
+//     public static void main(String[] args) throws Exception {
+//         Scanner sc = new Scanner(System.in);
+
+//         int k = sc.nextInt();
+//         int n = sc.nextInt();
+        
+//         int[] arr = new int[k];
+//         for (int i = 0; i < k; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+//         Arrays.sort(arr);
+//         long low = 1;
+//         long high = arr[k - 1];
+//         long result = 0;
+//         while (low <= high) {
+//             long mid = (low + high) / 2;
+//             int count = 0;
+
+//             for (int i = 0; i < k; i++) {
+//                 count += arr[i] / mid;
+//             }
+//             if (count >= n) {
+//                 result = mid;
+//                 low = mid + 1;
+//             } else {
+//                 high = mid - 1;
+//             }
+//         }
+//         System.out.println(result);
+//     }
+// }
+
+
+// import java.util.Scanner;
+
+// public class Main {
+//     public static void main(String[] args) throws Exception {
+//         Scanner sc = new Scanner(System.in);
+//         int n = sc.nextInt();
+//         int m = sc.nextInt();
+
+//         int[] arr = new int[n];
+//         for(int i = 0; i < n; i++){
+//             arr[i] = sc.nextInt();
+//         }
+        
+//         for(int i = 0; i < m; i++){
+//             int start_p = sc.nextInt();
+//             int end_p = sc.nextInt();
+//             int min = 0;
+//             int max = n - 1;
+//             while (!(start_p <= arr[min] && end_p >= arr[max])) {
+//                 if (start_p > arr[min]){
+//                     min++;
+//                 }
+//                 if (end_p < arr[max]){
+//                     max--;
+//                 }
+//             }
+//             System.out.println(max - min + 1);
+//         }
+//         sc.close();
+
+//     }
+// }
+
+
+// import java.util.Scanner;
+
+// public class Main {
+//     public static void main(String[] args) throws Exception {
+//         Scanner sc = new Scanner(System.in);
+//         int n = sc.nextInt();
+//         int m = sc.nextInt();
+
+//         int[] arr = new int[n];
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         for (int i = 0; i < m; i++) {
+//             int start_p = sc.nextInt();
+//             int end_p = sc.nextInt();
+
+//             int count = 0;
+//             for (int j = 0; j < n; j++) {
+//                 if (arr[j] >= start_p && arr[j] <= end_p) {
+//                     count++;
+//                 }
+//             }
+
+//             System.out.println(count);
+//         }
+//         sc.close();
+//     }
+// }
+
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-
-        int k = sc.nextInt();
         int n = sc.nextInt();
-        
-        int[] arr = new int[k];
-        for (int i = 0; i < k; i++) {
+        int m = sc.nextInt();
+
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-        Arrays.sort(arr);
-        long low = 1;
-        long high = arr[k - 1];
-        long result = 0;
-        while (low <= high) {
-            long mid = (low + high) / 2;
-            int count = 0;
 
-            for (int i = 0; i < k; i++) {
-                count += arr[i] / mid;
-            }
-            if (count >= n) {
-                result = mid;
-                low = mid + 1;
+        Arrays.sort(arr);
+
+        for (int i = 0; i < m; i++) {
+            int start_p = sc.nextInt();
+            int end_p = sc.nextInt();
+
+            int left = binarySearch(arr, start_p, true);
+            int right = binarySearch(arr, end_p, false);
+
+            System.out.println(right - left);
+        }
+        sc.close();
+    }
+
+    private static int binarySearch(int[] arr, int target, boolean lowerBound) {
+        int low = 0;
+        int high = arr.length;
+        while (low < high) {
+            int mid = (low + high) / 2;
+            if (lowerBound) {
+                if (arr[mid] < target) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
             } else {
-                high = mid - 1;
+                if (arr[mid] <= target) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
             }
         }
-        System.out.println(result);
+        return low;
     }
 }
