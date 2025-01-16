@@ -310,53 +310,110 @@
 //     }
 // }
 
-import java.util.Arrays;
+// import java.util.Arrays;
+// import java.util.Scanner;
+
+// public class Main {
+//     public static void main(String[] args) throws Exception {
+//         Scanner sc = new Scanner(System.in);
+//         int n = sc.nextInt();
+//         int m = sc.nextInt();
+
+//         int[] arr = new int[n];
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         Arrays.sort(arr);
+
+//         for (int i = 0; i < m; i++) {
+//             int start_p = sc.nextInt();
+//             int end_p = sc.nextInt();
+
+//             int left = binarySearch(arr, start_p, true);
+//             int right = binarySearch(arr, end_p, false);
+
+//             System.out.println(right - left);
+//         }
+//         sc.close();
+//     }
+
+//     private static int binarySearch(int[] arr, int target, boolean lowerBound) {
+//         int low = 0;
+//         int high = arr.length;
+//         while (low < high) {
+//             int mid = (low + high) / 2;
+//             if (lowerBound) {
+//                 if (arr[mid] < target) {
+//                     low = mid + 1;
+//                 } else {
+//                     high = mid;
+//                 }
+//             } else {
+//                 if (arr[mid] <= target) {
+//                     low = mid + 1;
+//                 } else {
+//                     high = mid;
+//                 }
+//             }
+//         }
+//         return low;
+//     }
+// }
+
+
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
         int n = sc.nextInt();
         int m = sc.nextInt();
-
         int[] arr = new int[n];
+        int max = 0;
+        int sum = 0;
+
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+            sum += arr[i];
         }
 
-        Arrays.sort(arr);
+        int low = max;
+        int high = sum;
+        int result = sum;
 
-        for (int i = 0; i < m; i++) {
-            int start_p = sc.nextInt();
-            int end_p = sc.nextInt();
-
-            int left = binarySearch(arr, start_p, true);
-            int right = binarySearch(arr, end_p, false);
-
-            System.out.println(right - left);
-        }
-        sc.close();
-    }
-
-    private static int binarySearch(int[] arr, int target, boolean lowerBound) {
-        int low = 0;
-        int high = arr.length;
-        while (low < high) {
+        while (low <= high) {
             int mid = (low + high) / 2;
-            if (lowerBound) {
-                if (arr[mid] < target) {
-                    low = mid + 1;
-                } else {
-                    high = mid;
-                }
+            if (canRecord(arr, n, m, mid)) {
+                result = mid;
+                high = mid - 1;
             } else {
-                if (arr[mid] <= target) {
-                    low = mid + 1;
-                } else {
-                    high = mid;
-                }
+                low = mid + 1;
             }
         }
-        return low;
+
+        System.out.println(result);
+    }
+
+    public static boolean canRecord(int[] arr, int n, int m, int size) {
+        int count = 1;
+        int total = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (total + arr[i] > size) {
+                count++;
+                total = arr[i];
+                if (count > m) {
+                    return false;
+                }
+            } else {
+                total += arr[i];
+            }
+        }
+        return true;
     }
 }
