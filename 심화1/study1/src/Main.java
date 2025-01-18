@@ -362,58 +362,66 @@
 // }
 
 
-import java.util.Scanner;
+
+// import java.util.Scanner;
+
+// public class Main {
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+
+//         int n = sc.nextInt();
+//         int m = sc.nextInt();
+//         int[] arr = new int[n];
+//         int max = 0;
+//         int sum = 0;
+
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//             if (arr[i] > max) {
+//                 max = arr[i];
+//             }
+//             sum += arr[i];
+//         }
+
+//         int low = max;
+//         int high = sum;
+//         int result = sum;
+
+//         while (low <= high) {
+//             int mid = (low + high) / 2;
+//             if (canRecord(arr, n, m, mid)) {
+//                 result = mid;
+//                 high = mid - 1;
+//             } else {
+//                 low = mid + 1;
+//             }
+//         }
+
+//         System.out.println(result);
+//     }
+
+//     public static boolean canRecord(int[] arr, int n, int m, int size) {
+//         int count = 1;
+//         int total = 0;
+
+//         for (int i = 0; i < n; i++) {
+//             if (total + arr[i] > size) {
+//                 count++;
+//                 total = arr[i];
+//                 if (count > m) {
+//                     return false;
+//                 }
+//             } else {
+//                 total += arr[i];
+//             }
+//         }
+//         return true;
+//     }
+// }
+
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        int[] arr = new int[n];
-        int max = 0;
-        int sum = 0;
-
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-            if (arr[i] > max) {
-                max = arr[i];
-            }
-            sum += arr[i];
-        }
-
-        int low = max;
-        int high = sum;
-        int result = sum;
-
-        while (low <= high) {
-            int mid = (low + high) / 2;
-            if (canRecord(arr, n, m, mid)) {
-                result = mid;
-                high = mid - 1;
-            } else {
-                low = mid + 1;
-            }
-        }
-
-        System.out.println(result);
     }
 
-    public static boolean canRecord(int[] arr, int n, int m, int size) {
-        int count = 1;
-        int total = 0;
-
-        for (int i = 0; i < n; i++) {
-            if (total + arr[i] > size) {
-                count++;
-                total = arr[i];
-                if (count > m) {
-                    return false;
-                }
-            } else {
-                total += arr[i];
-            }
-        }
-        return true;
-    }
 }
